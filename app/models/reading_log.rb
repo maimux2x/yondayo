@@ -1,5 +1,6 @@
-class BookLog < ApplicationRecord
-  has_many :books, dependent: :destroy
+class ReadingLog < ApplicationRecord
+  belongs_to :user
+  belongs_to :book
 
   enum :status, {
     unread:   0,
