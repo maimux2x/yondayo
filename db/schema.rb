@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_31_111508) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_02_115645) do
   create_table "books", force: :cascade do |t|
     t.string "author", null: false
     t.datetime "created_at", null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_31_111508) do
     t.string "publisher"
     t.string "title", null: false
     t.datetime "updated_at", null: false
+    t.check_constraint "published_at <= CURRENT_DATE"
   end
 
   create_table "reading_logs", force: :cascade do |t|
