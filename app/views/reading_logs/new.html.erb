@@ -1,0 +1,37 @@
+<h1>Reading Log New</h1>
+
+<%= form_with model: @log, url: reading_logs_path do |form| %>
+  <%= form.fields_for :book, @log.book do |book_form| %>
+    <div>
+      <%= book_form.label :title, "タイトル" %>
+      <%= book_form.text_field :title, required: true %>
+    </div>
+    <div>
+      <%= book_form.label :author, "著者" %>
+      <%= book_form.text_field :author, required: true %>
+    </div>
+    <div>
+      <%= book_form.label :publisher, "出版社" %>
+      <%= book_form.text_field :publisher %>
+    </div>
+    <div>
+      <%= book_form.label :published_at, "出版日" %>
+      <%= book_form.date_field :published_at %>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :status, "ステータス" %>
+    <% ReadingLog.statuses.each_key do |status| %>
+      <label>
+        <%= form.radio_button :status,status, required: true %>
+        <%= status %>
+      </label>
+    <% end %> 
+  </div>
+  <div>
+    <%= form.label :comment, "感想" %>
+    <%= form.text_area :comment %>
+  </div>
+
+  <button type="submit">保存</button>
+<% end %>

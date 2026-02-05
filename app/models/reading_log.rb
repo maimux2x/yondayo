@@ -7,4 +7,6 @@ class ReadingLog < ApplicationRecord
     progress: 1,
     read:     2
   }, validate: true
+
+  accepts_nested_attributes_for :book
 end

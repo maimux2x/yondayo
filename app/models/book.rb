@@ -10,7 +10,7 @@ class Book < ApplicationRecord
     return unless published_at.present?
 
     if published_at > Date.today
-      errors.add(:published_at, '未来の日付は使えません。')
+      errors.add(:published_at, "未来の日付は使えません。")
     end
   end
 end
