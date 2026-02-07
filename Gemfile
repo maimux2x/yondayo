@@ -1,23 +1,26 @@
 source "https://rubygems.org"
 
 gem "rails", "~> 8.1.2"
-gem "propshaft"
-gem "sqlite3", ">= 2.1"
-gem "puma", ">= 5.0"
-gem "importmap-rails"
-gem "turbo-rails"
-gem "stimulus-rails"
-gem "cssbundling-rails"
-gem "jbuilder"
 gem "bcrypt", "~> 3.1.7"
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "bootsnap", require: false
+gem "bootstrap"
+gem "bootstrap_form"
+gem "cssbundling-rails"
+gem "dartsass-rails"
+gem "image_processing", "~> 1.2"
+gem "importmap-rails"
+gem "jbuilder"
+gem "kamal", require: false
+gem "propshaft"
+gem "puma", ">= 5.0"
+gem "solid_cable"
 gem "solid_cache"
 gem "solid_queue"
-gem "solid_cable"
-gem "bootsnap", require: false
-gem "kamal", require: false
+gem "sqlite3", ">= 2.1"
+gem "stimulus-rails"
 gem "thruster", require: false
-gem "image_processing", "~> 1.2"
+gem "turbo-rails"
+gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
