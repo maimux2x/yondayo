@@ -1,0 +1,30 @@
+<%= bootstrap_form_with model: log, url: [log] do |form| %>
+  <%= form.fields_for :book, log.book do |book_form| %>
+    <%= book_form.hidden_field :id %>
+    <div>
+      <%= book_form.text_field :title, required: true %>
+    </div>
+    <div>
+      <%= book_form.text_field :author, required: true %>
+    </div>
+    <div>
+      <%= book_form.text_field :publisher %>
+    </div>
+    <div>
+      <%= book_form.date_field :published_at %>
+    </div>
+  <% end %>
+  <div>
+    <% ReadingLog.statuses.each_key do |status| %>
+      <label>
+        <%= form.radio_button :status,status, required: true %>
+        <%= status %>
+      </label>
+    <% end %> 
+  </div>
+  <div>
+    <%= form.text_area :comment %>
+  </div>
+
+  <button type="submit">保存</button>
+<% end %>

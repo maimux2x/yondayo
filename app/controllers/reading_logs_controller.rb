@@ -22,6 +22,28 @@ class ReadingLogsController < ApplicationController
     end
   end
 
+  def edit
+    @log = Current.user.reading_logs.find(params[:id])
+  end
+
+  def update
+    @log = Current.user.reading_logs.find(params[:id])
+
+    if @log.update(reading_log_params)
+      redirect_to @log, status: :see_other
+    else
+      render :edit, status: :unprocessable_content
+    end
+
+  end
+
+  def destroy
+     p 1
+    Current.user.reading_logs.find(params[:id]).destroy!
+
+    redirect_to reading_logs_path, status: :see_other
+  end
+
   private
 
   def reading_log_params
