@@ -1,6 +1,6 @@
 class ReadingLogsController < ApplicationController
   def index
-    @logs = ReadingLog.order(:created_at)
+    @logs = ReadingLog.order(created_at: :DESC)
   end
 
   def show
@@ -37,7 +37,6 @@ class ReadingLogsController < ApplicationController
   end
 
   def destroy
-     p 1
     Current.user.reading_logs.find(params[:id]).destroy!
 
     redirect_to reading_logs_path, status: :see_other
