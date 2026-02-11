@@ -34,7 +34,6 @@ class ReadingLogsController < ApplicationController
     else
       render :edit, status: :unprocessable_content
     end
-
   end
 
   def destroy
