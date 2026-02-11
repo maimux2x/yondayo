@@ -1,0 +1,16 @@
+<div class="mb-3">
+  <h1>Reading Logs</h1>
+  <table class="table table-borderless mb-5">
+    <tbody>
+      <% @logs.each do |log| %>
+        <tr>
+          <td><%= link_to log.book.title, reading_log_path(log), class: "link fs-3" %></td>
+          <td class="date"><%= l(log.created_at.to_date) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div>
+    <%= link_to :new, new_reading_log_path %>
+  </div>
+</div>

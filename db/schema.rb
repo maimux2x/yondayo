@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_29_122515) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_02_115645) do
+  create_table "books", force: :cascade do |t|
+    t.string "author", null: false
+    t.datetime "created_at", null: false
+    t.date "published_at"
+    t.string "publisher"
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.check_constraint "published_at <= CURRENT_DATE"
+  end
+
+  create_table "reading_logs", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["book_id"], name: "index_reading_logs_on_book_id"
+    t.index ["user_id"], name: "index_reading_logs_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
@@ -28,5 +49,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_29_122515) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "reading_logs", "books"
+  add_foreign_key "reading_logs", "users"
   add_foreign_key "sessions", "users"
 end

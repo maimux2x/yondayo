@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Reading Log</h1>
+  <div class="main">
+    <div class="book-title">
+      <h2><%= @log.book.title %></h2>
+    </div>
+    <div class="status">
+      <p><%= @log.status %></p>
+    </div>
+    <div class="comment">
+      <p><%= @log.comment %></p>
+    </div>
+  </div>
+  <div>
+    <%= link_to :edit, edit_reading_log_path(@log) %>
+  </div>
+  <div>
+    <%= link_to :delete, reading_log_path(@log), data: { turbo_method: :delete } %>
+  </div>
+</div>
