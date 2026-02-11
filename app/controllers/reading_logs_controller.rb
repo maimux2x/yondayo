@@ -54,8 +54,7 @@ class ReadingLogsController < ApplicationController
         :title,
         :author,
         :publisher,
-        :published_at,
-        :_destroy
+        :published_at
       ]
     ])
   end
