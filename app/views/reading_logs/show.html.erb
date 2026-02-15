@@ -1,20 +1,12 @@
-<div class="container">
-  <h1>Reading Log</h1>
-  <div class="main">
-    <div class="book-title">
-      <h2><%= @log.book.title %></h2>
-    </div>
-    <div class="status">
-      <p><%= @log.status %></p>
-    </div>
-    <div class="comment">
-      <p><%= @log.comment %></p>
-    </div>
-  </div>
-  <div>
-    <%= link_to :edit, edit_reading_log_path(@log) %>
-  </div>
-  <div>
-    <%= link_to :delete, reading_log_path(@log), data: { turbo_method: :delete } %>
+<h1 class="mb-4">Reading Log</h1>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <h2 class="card-title"><%= @log.book.title %></h2>
+    <span class="badge bg-<%= status_badge_class(@log.status) %>"><%= @log.status %></span>
+    <p class="card-text mt-3"><%= @log.comment %></p>
   </div>
 </div>
+
+<%= link_to :edit, edit_reading_log_path(@log), class: "btn btn-primary me-2" %>
+<%= link_to :delete, reading_log_path(@log), data: { turbo_method: :delete }, class: "btn btn-outline-danger" %>

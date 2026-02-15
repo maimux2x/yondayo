@@ -5,7 +5,6 @@ gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", require: false
 gem "bootstrap"
 gem "bootstrap_form"
-gem "cssbundling-rails"
 gem "dartsass-rails"
 gem "image_processing", "~> 1.2"
 gem "importmap-rails"
