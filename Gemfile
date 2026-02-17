@@ -8,6 +8,7 @@ gem "bootstrap_form"
 gem "dartsass-rails"
 gem "image_processing", "~> 1.2"
 gem "importmap-rails"
+gem "pagy"
 gem "jbuilder"
 gem "kamal", require: false
 gem "propshaft"
