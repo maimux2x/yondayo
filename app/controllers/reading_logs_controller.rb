@@ -1,6 +1,6 @@
 class ReadingLogsController < ApplicationController
   def index
-    @logs = ReadingLog.order(created_at: :DESC)
+    @pagy, @logs = pagy(ReadingLog.order(created_at: :DESC))
   end
 
   def show
