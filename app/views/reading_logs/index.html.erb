@@ -23,4 +23,6 @@
   <%== @pagy.series_nav(:bootstrap) %>
 </div>
 
-<%= link_to :new, new_reading_log_path, class: "btn btn-primary" %>
+<% if authenticated? %>
+  <%= link_to :new, new_reading_log_path, class: "btn btn-primary" %>
+<% end %>
