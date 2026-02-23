@@ -1,12 +1,10 @@
 class ReadingLogsController < ApplicationController
-  allow_unauthenticated_access only: %i[index show]
-
   def index
-    @pagy, @logs = pagy(ReadingLog.order(created_at: :DESC))
+    @pagy, @logs = pagy(Current.user.reading_logs.order(created_at: :DESC))
   end
 
   def show
-    @log = ReadingLog.find(params[:id])
+    @log = Current.user.reading_logs.find(params[:id])
   end
 
   def new
