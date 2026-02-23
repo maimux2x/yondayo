@@ -52,9 +52,7 @@ class ReadingLogsController < ApplicationController
       book_attributes: [
         :id,
         :title,
-        :author,
-        :publisher,
-        :published_at
+        :author
       ]
     ])
   end

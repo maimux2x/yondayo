@@ -3,8 +3,6 @@
     <%= book_form.hidden_field :id %>
     <%= book_form.text_field :title, required: true %>
     <%= book_form.text_field :author, required: true %>
-    <%= book_form.text_field :publisher %>
-    <%= book_form.date_field :published_at %>
   <% end %>
 
   <%= form.collection_radio_buttons :status, ReadingLog.statuses.keys, :itself, :itself %>
