@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "rails", "~> 8.1.2"
-gem "bcrypt", "~> 3.1.7"
+gem "bcrypt", "~> 3.1.22"
 gem "bootsnap", require: false
 gem "bootstrap"
 gem "bootstrap_form"
