@@ -1,0 +1,11 @@
+<%= bootstrap_form_with model: log, url: [log] do |form| %>
+  <%= form.fields_for :book, log.book do |book_form| %>
+    <%= book_form.hidden_field :id %>
+    <%= book_form.text_field :title, label: 'タイトル', required: true %>
+    <%= book_form.text_field :author, label: '著者', required: true %>
+  <% end %>
+
+  <%= form.collection_radio_buttons :status, ReadingLog.statuses_i18n, :first, :last, label: '進捗' %>
+  <%= form.text_area :comment, label: '感想' %>
+  <%= form.submit log.persisted? ? '更新する' : '追加する' %>
+<%end %>

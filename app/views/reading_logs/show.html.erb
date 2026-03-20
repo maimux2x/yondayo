@@ -1,0 +1,11 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <h2 class="card-title"><%= @log.book.title %></h2>
+    <span class="badge bg-<%= status_badge_class(@log.status) %>"><%= @log.status_i18n %></span>
+    <p class="card-text mt-3"><%= @log.comment %></p>
+  </div>
+</div>
+
+<%= link_to '編集', edit_reading_log_path(@log), class: "btn btn-primary me-2" %>
+<hr>
+<%= link_to '削除', reading_log_path(@log), data: { turbo_method: :delete }, class: "btn btn-outline-danger" %>
