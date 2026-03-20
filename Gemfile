@@ -1,18 +1,21 @@
 source "https://rubygems.org"
 
 gem "rails", "~> 8.1.2"
+
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", require: false
 gem "bootstrap"
 gem "bootstrap_form"
 gem "dartsass-rails"
+gem "enum_help"
 gem "image_processing", "~> 1.2"
 gem "importmap-rails"
-gem "pagy"
 gem "jbuilder"
 gem "kamal", require: false
+gem "pagy"
 gem "propshaft"
 gem "puma", ">= 5.0"
+gem "rails-i18n"
 gem "solid_cable"
 gem "solid_cache"
 gem "solid_queue"
