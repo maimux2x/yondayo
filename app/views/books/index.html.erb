@@ -1,3 +1,18 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <%= bootstrap_form_with model: @search, url: books_path, scope: :search, method: :get do |f| %>
+      <div class="row row-cols-3 g4 mb-4">
+        <%= f.text_field :title, label: 'タイトル' %>
+        <%= f.text_field :author, label: '著者' %>
+        <%= f.collection_check_boxes :status, Book.statuses_i18n, :first, :last, label: '進捗' %>
+        <%= f.date_field :created_at_from, label: '登録日（ここから）'%>
+        <%= f.date_field :created_at_to, label: '登録日（ここまで）'%>
+      </div>
+      <%= f.submit '検索' %>
+    <% end %>
+  </div>
+</div>
+
 <div class="row row-cols-2 g-4 mb-4">
   <% @books.each do |book| %>
     <div class="col">

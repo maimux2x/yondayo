@@ -1,6 +1,32 @@
 class BooksController < ApplicationController
+  class Search
+    include ActiveModel::Model
+    include ActiveModel::Attributes
+    include ActiveModel::Attributes::Normalization
+    include ActiveRecord::Sanitization::ClassMethods
+
+    normalizes :title, :author, :created_at_from, :created_at_to, with: -> { it.presence }
+    normalizes :status, with: -> { it.reject(&:blank?).presence }
+
+    def result
+      books = Current.user.books.all
+
+      books = books.where('title LIKE ?', "%#{sanitize_sql_like(title)}%") if title
+      books = books.where('author LIKE ?', "%#{sanitize_sql_like(author)}%") if author
+
+      books = books.where(status:) if status
+
+      books = books.where('created_at >= ?', created_at_from) if created_at_from
+      books = books.where('created_at <= ?', created_at_to.to_date.end_of_day) if created_at_to
+
+      books
+    end
+  end
+
   def index
-    @pagy, @books = pagy(Current.user.books.order(created_at: :DESC))
+    @search = Search.new(search_params)
+
+    @pagy, @books = pagy(@search.result.order(created_at: :DESC))
   end
 
   def show
@@ -42,6 +68,21 @@ class BooksController < ApplicationController
   end
 
   private
+
+  def search_params
+    return {} unless params[:search]
+
+    params.expect(search: [
+      :title,
+      :author,
+      :created_at_from,
+      :created_at_to,
+
+      {
+        status: []
+      }
+    ])
+  end
 
   def book_params
     params.expect(book: [
