@@ -1,0 +1,26 @@
+<div class="row row-cols-2 g-4 mb-4">
+  <% @books.each do |book| %>
+    <div class="col">
+      <%= link_to book_path(book), class: "text-decoration-none" do %>
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title text-dark"><%= book.title %></h5>
+            <p class="card-text text-muted"><%= book.author %></p>
+          </div>
+          <div class="card-footer d-flex justify-content-between align-items-center bg-transparent">
+            <span class="badge bg-<%= status_badge_class(book.status) %>"><%= book.status_i18n %></span>
+            <small class="text-muted"><%= l(book.created_at.to_date) %></small>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<% if @pagy.pages > 1 %>
+  <div class="d-flex justify-content-center">
+    <%== @pagy.series_nav(:bootstrap) %>
+  </div>
+<% end %>
+
+<%= link_to '追加', new_book_path, class: "btn btn-primary" %>

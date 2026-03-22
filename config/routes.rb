@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
 
-  root "reading_logs#index"
+  root "books#index"
 
-  resources :reading_logs
+  resources :books
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

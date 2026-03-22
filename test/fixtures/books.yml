@@ -1,0 +1,13 @@
+one:
+  user: one
+  title: 'BOOK1'
+  author: 'Alice'
+  status: 'unread'
+  comment: 'My friend recommended this book!'
+
+two:
+  user: one
+  title: 'BOOK2'
+  author: 'Bob'
+  status: 'progress'
+  comment: 'Fun book!'
