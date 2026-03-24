@@ -10,7 +10,7 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
     get books_path
 
     assert_response :success
-    assert_select '.card', 2
+    assert_select '.card-title', 2
   end
 
   test 'show' do
@@ -41,6 +41,17 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to books_path
     follow_redirect!
-    assert_select '.card', 1
+    assert_select '.card-title', 1
+  end
+
+  test 'search' do
+    get books_path, params: {search: {
+      author: 'Bob',
+      status: ['progress']
+    }}
+
+    assert_response :success
+    assert_select '.card-title', text: 'BOOK2'
+    assert_select '.card-title', 1
   end
 end
