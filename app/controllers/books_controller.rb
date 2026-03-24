@@ -13,9 +13,7 @@ class BooksController < ApplicationController
 
       books = books.where('title LIKE ?', "%#{sanitize_sql_like(title)}%") if title
       books = books.where('author LIKE ?', "%#{sanitize_sql_like(author)}%") if author
-
       books = books.where(status:) if status
-
       books = books.where('created_at >= ?', created_at_from) if created_at_from
       books = books.where('created_at <= ?', created_at_to.to_date.end_of_day) if created_at_to
 
