@@ -5,16 +5,18 @@ class BooksController < ApplicationController
     include ActiveModel::Attributes::Normalization
     include ActiveRecord::Sanitization::ClassMethods
 
+    attribute :statuses, array: :string, default: Book.statuses.keys
+
     normalizes :title, :author, :created_at_from, :created_at_to, with: -> { it.presence }
-    normalizes :status, with: -> { it.reject(&:blank?).presence }
+    normalizes :statuses, with: -> { it.reject(&:blank?).presence }
 
     def result
       books = Current.user.books.all
 
-      books = books.where('title LIKE ?', "%#{sanitize_sql_like(title)}%") if title
-      books = books.where('author LIKE ?', "%#{sanitize_sql_like(author)}%") if author
-      books = books.where(status:) if status
-      books = books.where('created_at >= ?', created_at_from) if created_at_from
+      books = books.where('title LIKE ?', "%#{sanitize_sql_like(title)}%")     if title
+      books = books.where('author LIKE ?', "%#{sanitize_sql_like(author)}%")   if author
+      books = books.where(status: statuses)                                    if statuses
+      books = books.where('created_at >= ?', created_at_from)                  if created_at_from
       books = books.where('created_at <= ?', created_at_to.to_date.end_of_day) if created_at_to
 
       books
@@ -76,9 +78,7 @@ class BooksController < ApplicationController
       :created_at_from,
       :created_at_to,
 
-      {
-        status: []
-      }
+      statuses: []
     ])
   end
 

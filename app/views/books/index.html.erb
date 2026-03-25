@@ -11,7 +11,7 @@
           <div class="row row-cols-3 g4 mb-4">
             <%= f.text_field :title, label: 'タイトル' %>
             <%= f.text_field :author, label: '著者' %>
-            <%= f.collection_check_boxes :status, Book.statuses_i18n, :first, :last, label: '進捗' %>
+            <%= f.collection_check_boxes :statuses, Book.statuses_i18n, :first, :last, label: '進捗' %>
             <%= f.date_field :created_at_from, label: '登録日（ここから）'%>
             <%= f.date_field :created_at_to, label: '登録日（ここまで）'%>
           </div>
