@@ -1,94 +1,21 @@
 class BooksController < ApplicationController
-  class Search
-    include ActiveModel::Model
-    include ActiveModel::Attributes
-    include ActiveModel::Attributes::Normalization
-    include ActiveRecord::Sanitization::ClassMethods
-
-    attribute :statuses, array: :string, default: Book.statuses.keys
-
-    normalizes :title, :author, :created_at_from, :created_at_to, with: -> { it.presence }
-    normalizes :statuses, with: -> { it.reject(&:blank?).presence }
-
-    def result
-      books = Current.user.books.all
-
-      books = books.where('title LIKE ?', "%#{sanitize_sql_like(title)}%")     if title
-      books = books.where('author LIKE ?', "%#{sanitize_sql_like(author)}%")   if author
-      books = books.where(status: statuses)                                    if statuses
-      books = books.where('created_at >= ?', created_at_from)                  if created_at_from
-      books = books.where('created_at <= ?', created_at_to.to_date.end_of_day) if created_at_to
-
-      books
-    end
-  end
-
-  def index
-    @search = Search.new(search_params)
-
-    @pagy, @books = pagy(@search.result.order(created_at: :DESC))
-  end
-
-  def show
-    @book = Current.user.books.find(params[:id])
-  end
-
-  def new
-    @book = Current.user.books.new
-  end
-
   def create
-    @book = Current.user.books.new(book_params)
+    isbn    = params.expect(:isbn)
+    res     = HTTPX.get('https://api.openbd.jp/v1/get', params: {isbn:})
+    payload = res.json(symbolize_names: true).first
+    title   = payload.dig(:onix, :DescriptiveDetail, :TitleDetail, :TitleElement, :TitleText, :content)
 
-    if @book.save
-      redirect_to @book, status: :see_other
+    author = payload.dig(:onix, :DescriptiveDetail, :Contributor).map {
+      it.dig(:PersonName, :content)
+    }.join(', ')
+
+    book = Book.find_or_initialize_by(isbn:)
+    book.update!(title:, author:)
+
+    if reading = Current.user.readings.find_by(book:)
+      redirect_to edit_reading_path(reading)
     else
-      render :new, status: :unprocessable_content
+      redirect_to new_reading_path(book_id: book.id)
     end
-  end
-
-  def edit
-    @book = Current.user.books.find(params[:id])
-  end
-
-  def update
-    @book = Current.user.books.find(params[:id])
-
-    if @book.update(book_params)
-      redirect_to @book, status: :see_other
-    else
-      render :edit, status: :unprocessable_content
-    end
-  end
-
-  def destroy
-    Current.user.books.find(params[:id]).destroy!
-
-    redirect_to books_path, status: :see_other
-  end
-
-  private
-
-  def search_params
-    return {} unless params[:search]
-
-    params.expect(search: [
-      :title,
-      :author,
-      :created_at_from,
-      :created_at_to,
-
-      statuses: []
-    ])
-  end
-
-  def book_params
-    params.expect(book: [
-      :id,
-      :title,
-      :author,
-      :status,
-      :comment
-    ])
   end
 end

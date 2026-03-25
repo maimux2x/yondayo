@@ -16,7 +16,7 @@ class CreateReadings < ActiveRecord::Migration[8.1]
       dir.up do
         execute <<~SQL
           INSERT INTO readings (book_id, user_id, status, comment, created_at, updated_at)
-          SELECT id, user_id, status, comment, TIME('now'), TIME('now')
+          SELECT id, user_id, status, comment, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
           FROM books
         SQL
       end

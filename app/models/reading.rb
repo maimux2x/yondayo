@@ -2,7 +2,7 @@ class Reading < ApplicationRecord
   belongs_to :book
   belongs_to :user
 
-  validates :user_id, uniquness: {scope: :book_id}
+  validates :user_id, uniqueness: {scope: :book_id}
 
   enum :status, {
     unread:   0,
