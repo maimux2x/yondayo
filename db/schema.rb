@@ -10,16 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_21_082903) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_25_021102) do
   create_table "books", force: :cascade do |t|
     t.string "author", null: false
+    t.datetime "created_at", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "readings", force: :cascade do |t|
+    t.integer "book_id", null: false
     t.string "comment"
     t.datetime "created_at", null: false
     t.integer "status", default: 0, null: false
-    t.string "title", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.index ["user_id"], name: "index_books_on_user_id"
+    t.index ["book_id", "user_id"], name: "index_readings_on_book_id_and_user_id", unique: true
+    t.index ["book_id"], name: "index_readings_on_book_id"
+    t.index ["user_id"], name: "index_readings_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -39,6 +47,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_21_082903) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
-  add_foreign_key "books", "users"
+  add_foreign_key "readings", "books"
+  add_foreign_key "readings", "users"
   add_foreign_key "sessions", "users"
 end
