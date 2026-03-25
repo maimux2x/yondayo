@@ -1,8 +1,0 @@
-ja:
-  enums:
-    book:
-      status:
-        unread: '未読'
-        progress: '読んでいる'
-        read: '読み終わった'
-

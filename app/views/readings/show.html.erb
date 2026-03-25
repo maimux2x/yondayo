@@ -1,0 +1,22 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h2 class="card-title"><%= @reading.book.title %></h2>
+    <p><%= @reading.book.author %></p>
+
+    <hr>
+
+    <dl class="mb-0">
+      <dt>進捗</dt>
+      <dd><%= @reading.status_i18n %></dd>
+
+      <dt>感想</dt>
+      <dd style="white-space: pre-wrap"><%= @reading.comment %></dd>
+    </dl>
+  </div>
+</div>
+
+<%= link_to '編集', edit_reading_path(@reading), class: 'btn btn-outline-primary' %>
+
+<hr>
+
+<%= button_to '削除', reading_path(@reading), method: :delete, class: 'btn btn-danger', data: {turbo_confirm: '削除しますか？'} %>

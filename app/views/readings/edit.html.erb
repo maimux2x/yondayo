@@ -1,0 +1,7 @@
+<h2 class="mb-3">読書記録を編集</h2>
+<%= render 'book', book: @reading.book %>
+
+<%= bootstrap_form_with model: @reading do |f| %>
+  <%= render 'form', f: %>
+  <%= f.primary '更新' %>
+<% end %>
