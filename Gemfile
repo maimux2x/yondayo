@@ -8,6 +8,7 @@ gem 'bootstrap'
 gem 'bootstrap_form'
 gem 'dartsass-rails'
 gem 'enum_help'
+gem 'httpx'
 gem 'image_processing', '~> 1.2'
 gem 'importmap-rails'
 gem 'jbuilder'
@@ -24,6 +25,7 @@ gem 'stimulus-rails'
 gem 'thruster', require: false
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[ windows jruby ]
+gem 'webmock'
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'

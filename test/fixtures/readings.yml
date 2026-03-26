@@ -1,0 +1,5 @@
+alice_alice1:
+  user: alice
+  book: alice1
+  status: unread
+  comment: My friend recommended this book!

@@ -1,0 +1,8 @@
+ja:
+  enums:
+    reading:
+      status:
+        unread: 未読
+        in_progress: 読んでいる
+        read: 読み終わった
+
