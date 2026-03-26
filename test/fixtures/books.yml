@@ -1,13 +1,9 @@
-one:
-  user: one
-  title: 'BOOK1'
-  author: 'Alice'
-  status: 'unread'
-  comment: 'My friend recommended this book!'
+alice1:
+  title: 不思議の国のアリス
+  author: ルイス・キャロル
+  isbn: 1234567890123
 
-two:
-  user: one
-  title: 'BOOK2'
-  author: 'Bob'
-  status: 'progress'
-  comment: 'Fun book!'
+alice2:
+  title: 鏡の国のアリス
+  author: ルイス・キャロル
+  isbn: 1234567890124

@@ -13,9 +13,9 @@ class BooksController < ApplicationController
     book.update!(title:, author:)
 
     if reading = Current.user.readings.find_by(book:)
-      redirect_to edit_reading_path(reading)
+      redirect_to edit_reading_path(reading), status: :see_other
     else
-      redirect_to new_reading_path(book_id: book.id)
+      redirect_to new_reading_path(book_id: book.id), status: :see_other
     end
   end
 end

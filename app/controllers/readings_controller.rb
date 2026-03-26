@@ -33,6 +33,12 @@ class ReadingsController < ApplicationController
     redirect_to reading_path(@reading), status: :see_other
   end
 
+  def destroy
+    Current.user.readings.find(params[:id]).delete
+
+    redirect_to readings_path, status: :see_other, notice: '削除しました'
+  end
+
   private
 
   def reading_params

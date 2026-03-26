@@ -5,8 +5,8 @@ class Reading < ApplicationRecord
   validates :user_id, uniqueness: {scope: :book_id}
 
   enum :status, {
-    unread:   0,
-    progress: 1,
-    read:     2
+    unread:      0,
+    in_progress: 1,
+    read:        2
   }, validate: true
 end

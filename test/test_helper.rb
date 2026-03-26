@@ -2,6 +2,8 @@ ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
 require_relative 'test_helpers/session_test_helper'
+require 'httpx/adapters/webmock'
+require 'webmock/minitest'
 
 module ActiveSupport
   class TestCase
@@ -14,3 +16,5 @@ module ActiveSupport
     # Add more helper methods to be used by all tests here...
   end
 end
+
+WebMock.disable_net_connect!

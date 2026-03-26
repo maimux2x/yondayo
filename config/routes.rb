@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root 'readings#index'
 
-  resources :readings, only: %i[index new create show edit update]
+  resources :readings, only: %i[index new create show edit update destroy]
   resources :books,    only: %i[create update]
 
   get 'up' => 'rails/health#show', as: :rails_health_check
