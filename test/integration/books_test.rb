@@ -80,21 +80,11 @@ class BooksTest < ActionDispatch::IntegrationTest
       }
     ).to_return_json(
       body: [
-        onix: {
-          DescriptiveDetail: {
-            TitleDetail: {
-              TitleElement: {
-                TitleText: {
-                  content: 'Updated title'
-                }
-              }
-            },
-            Contributor: [
-              PersonName: {
-                content: 'Updated author'
-              }
-            ]
-          }
+        summary: {
+          izsbn:   book.isbn,
+          title:  'Updated title',
+          author: 'Updated author',
+          cover:  ''
         }
       ]
     )
