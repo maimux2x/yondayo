@@ -14,21 +14,11 @@ class BooksTest < ActionDispatch::IntegrationTest
       }
     ).to_return_json(
       body: [
-        onix: {
-          DescriptiveDetail: {
-            TitleDetail: {
-              TitleElement: {
-                TitleText: {
-                  content: 'New book'
-                }
-              }
-            },
-            Contributor: [
-              PersonName: {
-                content: 'New author'
-              }
-            ]
-          }
+        summary: {
+          isbn:   '1234567890123',
+          title:  'New book',
+          author: 'New author',
+          cover:  ''
         }
       ]
     )
@@ -58,21 +48,11 @@ class BooksTest < ActionDispatch::IntegrationTest
       }
     ).to_return_json(
       body: [
-        onix: {
-          DescriptiveDetail: {
-            TitleDetail: {
-              TitleElement: {
-                TitleText: {
-                  content: 'BOOK'
-                }
-              }
-            },
-            Contributor: [
-              PersonName: {
-                content: 'Charlie'
-              }
-            ]
-          }
+        summary: {
+          isbn:   book.isbn,
+          title:  'BOOK',
+          author: 'Charlie',
+          cover:  ''
         }
       ]
     )

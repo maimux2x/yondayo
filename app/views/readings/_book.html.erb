@@ -5,3 +5,8 @@
   <dt>著者</dt>
   <dd><%= book.author %></dd>
 </dl>
+
+<% if book.cover.attached? %>
+  <%= image_tag(book.cover) %>
+<% end %>
+
