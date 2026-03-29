@@ -1,15 +1,15 @@
 <h2 class="mb-3">読書記録を追加</h2>
 
-<% if book = @reading.book %>
-  <%= render 'book', book: %>
-  <%= bootstrap_form_with model: @reading do |f| %>
-    <%= f.hidden_field :book_id %>
-    <%= render 'form', f: %>
-    <%= f.primary '追加' %>
-  <% end %>
-<% else %>
+<%= bootstrap_form_with url: search_books_path, method: :get, class: 'mb-3' do |f| %>
+  <%= f.text_field :q, label: 'タイトル・著者・ISBN' %>
+  <%= f.primary '検索' %>
+<% end %>
+
+<% if @books %>
   <%= bootstrap_form_with url: books_path, class: 'mb-3' do |f| %>
-    <%= f.text_field :isbn, label: 'ISBN' %>
-    <%= f.primary '検索' %>
+    <% @books.each do |book| %>
+      <%= f.radio_button :book_id, book[:id], label: "#{book[:title]} (#{book[:author]})" %>
+    <% end %>
+    <%= f.primary '選択', class: 'mt-3 btn btn-primary' %>
   <% end %>
 <% end %>
