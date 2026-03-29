@@ -1,26 +1,24 @@
 <div class="card mb-3">
   <div class="card-body">
-    <div class="container">
-      <div class="row align-items-start">
-        <% if @reading.book.cover.attached? %>
-          <div class="col">
-            <%= image_tag(@reading.book.cover) %>
-          </div>
-        <% end %>
-        <div class="col">
-          <h2 class="card-title"><%= @reading.book.title %></h2>
-          <p><%= @reading.book.author %></p>
-
-          <hr>
-
-          <dl class="mb-0">
-            <dt>進捗</dt>
-            <dd><%= @reading.status_i18n %></dd>
-
-            <dt>感想</dt>
-            <dd style="white-space: pre-wrap"><%= @reading.comment %></dd>
-          </dl>
+    <div class="d-flex align-items-center">
+      <% if @reading.book.cover.attached? %>
+        <div class="p-2">
+          <%= image_tag(@reading.book.cover, width: '120') %>
         </div>
+      <% end %>
+      <div class="p-2 flex-grow-1">
+        <h2 class="card-title"><%= @reading.book.title %></h2>
+        <p><%= @reading.book.author %></p>
+
+        <hr>
+
+        <dl class="mb-0">
+          <dt>進捗</dt>
+          <dd><%= @reading.status_i18n %></dd>
+
+          <dt>感想</dt>
+          <dd style="white-space: pre-wrap"><%= @reading.comment %></dd>
+        </dl>
       </div>
     </div>
   </div>
