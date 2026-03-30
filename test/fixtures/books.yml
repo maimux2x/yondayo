@@ -1,9 +1,9 @@
 alice1:
   title: 不思議の国のアリス
   author: ルイス・キャロル
-  isbn: 1234567890123
+  google_books_volume_id: volume1
 
 alice2:
   title: 鏡の国のアリス
   author: ルイス・キャロル
-  isbn: 1234567890124
+  google_books_volume_id: volume2

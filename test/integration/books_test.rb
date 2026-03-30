@@ -5,36 +5,37 @@ class BooksTest < ActionDispatch::IntegrationTest
     post session_path, params: {email_address: users(:alice).email_address, password: 'password'}
   end
 
-  test 'create (new book)' do
-    Book.destroy_all
-
-    stub_request(:get, 'https://api.openbd.jp/v1/get').with(
-      query: {
-        isbn: '1234567890123'
-      }
+  test 'index' do
+    stub_request(:get, 'https://www.googleapis.com/books/v1/volumes').with(
+      query: hash_including(
+        q: 'Title'
+      )
     ).to_return_json(
-      body: [
-        summary: {
-          isbn:   '1234567890123',
-          title:  'New book',
-          author: 'New author',
-          cover:  ''
-        }
-      ]
+      body: {
+        items: [
+          {
+            id: 'volume1',
+
+            volumeInfo: {
+              title: 'Title 1'
+            }
+          },
+          {
+            id: 'volume2',
+
+            volumeInfo: {
+              title: 'Title 2'
+            }
+          }
+        ]
+      }
     )
 
-    assert_difference 'Book.count', 1 do
-      post books_path, params: {isbn: '1234567890123'}
+    get books_path, params: {
+      q: 'Title'
+    }
 
-      assert_response :see_other
-    end
-
-    book = Book.last
-
-    assert_redirected_to new_reading_path(book_id: book.id)
-
-    assert_equal 'New book',   book.title
-    assert_equal 'New author', book.author
+    assert_response :success
   end
 
   test 'create (existing book, new reading)' do
