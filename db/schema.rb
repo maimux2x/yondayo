@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_26_052553) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_30_064649) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -40,12 +40,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_26_052553) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.string "author", null: false
+    t.string "author"
     t.datetime "created_at", null: false
-    t.string "isbn", null: false
+    t.string "google_books_volume_id", null: false
     t.string "title", null: false
     t.datetime "updated_at", null: false
-    t.index ["isbn"], name: "index_books_on_isbn", unique: true
+    t.index ["google_books_volume_id"], name: "index_books_on_google_books_volume_id", unique: true
   end
 
   create_table "readings", force: :cascade do |t|

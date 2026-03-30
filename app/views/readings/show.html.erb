@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="d-flex align-items-center">
       <% if @reading.book.cover.attached? %>
-        <div class="me-2">
+        <div class="me-3">
           <%= image_tag(@reading.book.cover, width: '120') %>
         </div>
       <% end %>
