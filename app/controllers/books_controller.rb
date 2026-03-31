@@ -7,7 +7,6 @@ class BooksController < ApplicationController
         key:        ENV['BOOKS_API_KEY']
       }).json(symbolize_names: true)
 
-
       @volumes = payloads[:items].map {|payload|
         volume_info = payload[:volumeInfo]
 
@@ -17,7 +16,7 @@ class BooksController < ApplicationController
           author:         volume_info[:authors]&.join(', '),
           publisher:      volume_info[:publisher],
           published_date: volume_info[:publishedDate],
-          cover_url:      volume_info.dig(:imageLinks, :smallThumbnail),
+          cover_url:      volume_info.dig(:imageLinks, :thumbnail),
           is_ebook:       payload.dig(:saleInfo, :isEbook)
         }
       }
@@ -31,12 +30,13 @@ class BooksController < ApplicationController
       key: ENV['BOOKS_API_KEY']
     }).json(symbolize_names: true)
 
-    book  = Book.find_or_initialize_by(google_books_volume_id: volume_id)
-    cover = URI.open(payload.dig(:volumeInfo, :imageLinks, :smallThumbnail))
+    book        = Book.find_or_initialize_by(google_books_volume_id: volume_id)
+    volume_info = payload[:volumeInfo]
+    cover       = URI.open(volume_info.dig(:imageLinks, :large) || volume_info.dig(:imageLinks, :thumbnail))
 
     book.update!(
-      title:  payload.dig(:volumeInfo, :title),
-      author: payload.dig(:volumeInfo, :authors)&.join(', '),
+      title: volume_info[:title],
+      author: volume_info[:authors]&.join(', '),
 
       cover: {
         io:           cover,
@@ -46,9 +46,9 @@ class BooksController < ApplicationController
     )
 
     if reading = Current.user.readings.find_by(book:)
-      redirect_to edit_reading_path(reading)
+      redirect_to edit_reading_path(reading), status: :see_other
     else
-      redirect_to new_reading_path(book_id: book.id)
+      redirect_to new_reading_path(book_id: book.id), status: :see_other
     end
   end
 end

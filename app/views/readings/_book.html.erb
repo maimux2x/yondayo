@@ -7,6 +7,8 @@
 </dl>
 
 <% if book.cover.attached? %>
-  <%= image_tag(book.cover) %>
+  <div class='mb-3'>
+    <%= image_tag(book.cover, width: 100) %>
+  </div>
 <% end %>
 
