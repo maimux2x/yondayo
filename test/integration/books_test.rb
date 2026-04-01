@@ -7,9 +7,11 @@ class BooksTest < ActionDispatch::IntegrationTest
 
   test 'index' do
     stub_request(:get, 'https://www.googleapis.com/books/v1/volumes').with(
-      query: hash_including(
-        q: 'Title'
-      )
+      query: {
+        q:          'Title',
+        maxResults: 3,
+        key:        'DUMMY'
+      }
     ).to_return_json(
       body: {
         items: [
@@ -50,11 +52,13 @@ class BooksTest < ActionDispatch::IntegrationTest
   end
 
   test 'create (new book, new reading)' do
-    stub_request(:get, 'https://www.googleapis.com/books/v1/volumes/volume').with(
-      query: hash_including({})
+    stub_request(:get, 'https://www.googleapis.com/books/v1/volumes/VOLUME_ID').with(
+      query: {
+        key: 'DUMMY'
+      }
     ).to_return_json(
       body: {
-        id: 'volume',
+        id: 'VOLUME_ID',
 
         volumeInfo: {
           title: 'New book',
@@ -77,7 +81,7 @@ class BooksTest < ActionDispatch::IntegrationTest
 
     assert_difference 'Book.count', 1 do
       post books_path, params: {
-        volume_id: 'volume'
+        volume_id: 'VOLUME_ID'
       }
 
       assert_response :see_other
