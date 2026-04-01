@@ -32,18 +32,21 @@ class BooksController < ApplicationController
 
     book        = Book.find_or_initialize_by(google_books_volume_id: volume_id)
     volume_info = payload[:volumeInfo]
-    cover_url   = volume_info.dig(:imageLinks, :large) || volume_info.dig(:imageLinks, :thumbnail)
-    cover       = cover_url ? URI.open(cover_url) : nil
+
+    cover = %i[large thumbnail].filter_map { volume_info.dig(:imageLinks, it) }.first&.then {|url|
+      io = URI.open(url)
+
+      {
+        io:,
+        filename:     volume_id,
+        content_type: io.content_type
+      }
+    }
 
     book.update!(
-      title: volume_info[:title],
+      title:  volume_info[:title],
       author: volume_info[:authors]&.join(', '),
-
-      cover: cover ? {
-        io:           URI.open(cover_url),
-        filename:     volume_id,
-        content_type: cover.content_type
-      } : nil
+      cover:
     )
 
     if reading = Current.user.readings.find_by(book:)
