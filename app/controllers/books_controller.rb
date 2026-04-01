@@ -4,8 +4,8 @@ class BooksController < ApplicationController
       payloads = HTTPX.get('https://www.googleapis.com/books/v1/volumes', params: {
         q:,
         maxResults: 3,
-        key:        ENV['BOOKS_API_KEY']
-      }).json(symbolize_names: true)
+        key:        Rails.application.credentials.google_books_api_key!
+      }).raise_for_status.json(symbolize_names: true)
 
       @volumes = payloads[:items].map {|payload|
         volume_info = payload[:volumeInfo]
@@ -27,22 +27,23 @@ class BooksController < ApplicationController
     volume_id = params.expect(:volume_id)
 
     payload = HTTPX.get("https://www.googleapis.com/books/v1/volumes/#{volume_id}", params: {
-      key: ENV['BOOKS_API_KEY']
-    }).json(symbolize_names: true)
+      key: Rails.application.credentials.google_books_api_key!
+    }).raise_for_status.json(symbolize_names: true)
 
     book        = Book.find_or_initialize_by(google_books_volume_id: volume_id)
     volume_info = payload[:volumeInfo]
-    cover       = URI.open(volume_info.dig(:imageLinks, :large) || volume_info.dig(:imageLinks, :thumbnail))
+    cover_url   = volume_info.dig(:imageLinks, :large) || volume_info.dig(:imageLinks, :thumbnail)
+    cover       = cover_url ? URI.open(cover_url) : nil
 
     book.update!(
       title: volume_info[:title],
       author: volume_info[:authors]&.join(', '),
 
-      cover: {
-        io:           cover,
+      cover: cover ? {
+        io:           URI.open(cover_url),
         filename:     volume_id,
         content_type: cover.content_type
-      }
+      } : nil
     )
 
     if reading = Current.user.readings.find_by(book:)

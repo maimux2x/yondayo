@@ -9,9 +9,11 @@
     <div class="card mb-3">
       <div class="card-body">
         <div class="d-flex">
-          <div class="me-3">
-            <%= image_tag volume[:cover_url], width: 100 %>
-          </div>
+          <% if cover_url = volume[:cover_url] %>
+            <div class="me-3">
+              <%= image_tag volume[:cover_url], width: 100 %>
+            </div>
+          <% end %>
           <div class="flex-grow-1">
             <%= form_tag(books_path) do %>
               <h5 class="card-title">
