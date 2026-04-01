@@ -1,0 +1,8 @@
+development:
+  api_key: <%= ENV['GOOGLE_BOOKS_API_KEY'] %>
+
+test:
+  api_key: DUMMY
+
+production:
+  api_key: <%= Rails.application.credentials.google_books_api_key %>

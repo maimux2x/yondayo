@@ -4,7 +4,7 @@ class BooksController < ApplicationController
       payloads = HTTPX.get('https://www.googleapis.com/books/v1/volumes', params: {
         q:,
         maxResults: 3,
-        key:        Rails.application.credentials.google_books_api_key!
+        key:        Rails.application.config_for(:google_books).api_key!
       }).raise_for_status.json(symbolize_names: true)
 
       @volumes = payloads[:items].map {|payload|
@@ -27,7 +27,7 @@ class BooksController < ApplicationController
     volume_id = params.expect(:volume_id)
 
     payload = HTTPX.get("https://www.googleapis.com/books/v1/volumes/#{volume_id}", params: {
-      key: Rails.application.credentials.google_books_api_key!
+      key: Rails.application.config_for(:google_books).api_key!
     }).raise_for_status.json(symbolize_names: true)
 
     book        = Book.find_or_initialize_by(google_books_volume_id: volume_id)
