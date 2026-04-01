@@ -7,7 +7,7 @@ image: maimu/bookshelf
 # Deploy to these servers.
 servers:
   web:
-    - bookshelf.maimux2x.com
+    - michi.maimux2x.com
   # job:
   #   hosts:
   #     - 192.168.0.1
