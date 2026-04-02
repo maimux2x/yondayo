@@ -1,13 +1,14 @@
 class BooksController < ApplicationController
   def index
     if q = params[:q].presence
-      payloads = HTTPX.get('https://www.googleapis.com/books/v1/volumes', params: {
+      payload = HTTPX.get('https://www.googleapis.com/books/v1/volumes', params: {
         q:,
         maxResults: 3,
+        orderBy:    'relevance',
         key:        Rails.application.config_for(:google_books).api_key!
       }).raise_for_status.json(symbolize_names: true)
 
-      @volumes = payloads[:items].map {|payload|
+      @volumes = Array(payload[:items]).map {|payload|
         volume_info = payload[:volumeInfo]
 
         {

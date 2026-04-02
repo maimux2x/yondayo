@@ -10,6 +10,7 @@ class BooksTest < ActionDispatch::IntegrationTest
       query: {
         q:          'Title',
         maxResults: 3,
+        orderBy:    'relevance',
         key:        'DUMMY'
       }
     ).to_return_json(
