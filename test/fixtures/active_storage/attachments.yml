@@ -1,0 +1,10 @@
+alice1_cover:
+  name: cover
+  record: alice1 (Book)
+  blob: alice1_cover_blob
+
+alice2_cover:
+  name: cover
+  record: alice2 (Book)
+  blob: alice2_cover_blob
+

@@ -1,0 +1,43 @@
+<h2 class="mb-3">本を検索</h2>
+<%= bootstrap_form_with url: books_path, method: :get, class: 'mb-3' do |f| %>
+  <%= f.text_field :q, label: 'タイトル・著者・ISBN', value: params[:q] %>
+  <%= f.primary '検索' %>
+<% end %>
+
+<% if @volumes %>
+  <% if @volumes.size > 0 %>
+    <% @volumes.each do |volume| %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="d-flex">
+            <% if cover_url = volume[:cover_url] %>
+              <div class="me-3">
+                <%= image_tag volume[:cover_url], width: 100 %>
+              </div>
+            <% end %>
+            <div class="flex-grow-1">
+              <h5 class="card-title">
+                <%= link_to volume[:title], books_path(volume_id: volume[:id]), data: { turbo_method: :post }, class: 'stretched-link text-decoration-none' %>
+                <% if volume[:is_ebook] %>
+                  <small class="text-secondary">電子書籍</small>
+                <% end %>
+              </h5>
+              <dl class="mb-0">
+                <dt>著者</dt>
+                <dd><%= volume[:author] %></dd>
+
+                <dt>出版社</dt>
+                <dd><%= volume[:publisher] %></dd>
+
+                <dt>出版日</dt>
+                <dd><%= volume[:published_date] %></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% elsif @volumes.empty? %>
+    <p>検索結果が見つかりません。</p>
+  <% end %>
+<% end %>

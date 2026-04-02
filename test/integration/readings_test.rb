@@ -21,18 +21,11 @@ class ReadingsTest < ActionDispatch::IntegrationTest
     assert_dom 'h2', reading.book.title
   end
 
-  test 'new (without book_id)' do
-    get new_reading_path
-
-    assert_response :success
-    assert_dom 'input[type="submit"][value="検索"]'
-  end
-
-  test 'new (with book_id)' do
+  test 'new' do
     get new_reading_path(book_id: books(:alice2).id)
 
     assert_response :success
-    assert_dom 'input[type="submit"][value="追加"]'
+    assert_dom 'input[type="submit"][value="追加する"]'
   end
 
   test 'create' do
