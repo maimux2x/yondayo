@@ -24,7 +24,28 @@
   </div>
 </div>
 
-<%= link_to '編集', edit_reading_path(@reading), class: 'btn btn-outline-primary' %>
+<div class="d-flex">
+  <%= link_to '編集', edit_reading_path(@reading), class: 'btn btn-outline-primary me-3' %>
+  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#URLShareModal" >
+    共有する
+  </button>
+  <div class="modal fage" id="URLShareModal" tabindex="-1" aria-labelledby="URLShareModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="mocal-title fs-5" id="URLShareModalLabel">読書記録を共有する</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group" data-controller="clipboard">
+            <input type="text" class="form-control" data-clipboard-target="source" value="<%= public_reading_url(@reading.share_token) %>" readonly>
+            <button class="btn btn-outline-secondary" type="button" data-action="clipboard#copy" data-clipboard-target="button">コピー</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <hr>
 

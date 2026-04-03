@@ -3,3 +3,4 @@ alice_alice1:
   book: alice1
   status: unread
   comment: My friend recommended this book!
+  share_token: token
