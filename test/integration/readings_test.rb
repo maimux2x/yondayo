@@ -5,13 +5,6 @@ class ReadingsTest < ActionDispatch::IntegrationTest
     post session_path, params: {email_address: users(:alice).email_address, password: 'password'}
   end
 
-  test 'index' do
-    get readings_path
-
-    assert_response :success
-    assert_dom 'a', readings(:alice_alice1).book.title
-  end
-
   test 'show' do
     reading = readings(:alice_alice1)
 

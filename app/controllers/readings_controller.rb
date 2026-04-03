@@ -1,10 +1,4 @@
 class ReadingsController < ApplicationController
-  def index
-    readings = Current.user.readings.order(id: :desc)
-
-    @pagy, @readings = pagy(readings)
-  end
-
   def show
     @reading = Current.user.readings.find(params[:id])
   end
