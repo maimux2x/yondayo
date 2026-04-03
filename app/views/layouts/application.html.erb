@@ -37,10 +37,13 @@
             <% if authenticated? %>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <%= Current.user.email_address %>
+                  <%= Current.user.name %>
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <%= link_to "プロフィール編集", edit_profile_path, class: "dropdown-item" %>
+                  </li>
                   <li>
                     <%= link_to "Logout", session_path, data: { turbo_method: :delete}, class: "dropdown-item" %>
                   </li>

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root 'homes#show'
 
+  resource :profile,   only: %i[edit update]
   resources :readings, only: %i[show new create edit update destroy]
   resources :books,    only: %i[index create]
 
