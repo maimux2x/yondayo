@@ -2,7 +2,9 @@ class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
 
-  has_one_attached :avatar
+  has_one_attached :avatar do |attachable|
+    attachable.variant :profile, resize_to_limit: [100, 100]
+  end
 
   has_many :readings, dependent: :destroy
   has_many :books,    through: :readings

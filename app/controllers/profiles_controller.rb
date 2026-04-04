@@ -6,15 +6,15 @@ class ProfilesController < ApplicationController
   def update
     @profile = Current.user
 
-    @profile.update!(profile_params)
+    @profile.update!(user_params)
 
-    redirect_to :edit, status: :see_other
+    redirect_to edit_profile_path, status: :see_other, notice: '更新しました。'
   end
 
   private
 
-  def profile_params
-    params.expect(profile: [
+  def user_params
+    params.expect(user: [
       :name,
       :email_address,
       :avatar
