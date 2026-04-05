@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_30_064649) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_03_074739) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -52,11 +52,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_30_064649) do
     t.integer "book_id", null: false
     t.string "comment"
     t.datetime "created_at", null: false
+    t.string "share_token", null: false
     t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["book_id", "user_id"], name: "index_readings_on_book_id_and_user_id", unique: true
     t.index ["book_id"], name: "index_readings_on_book_id"
+    t.index ["share_token"], name: "index_readings_on_share_token", unique: true
     t.index ["user_id"], name: "index_readings_on_user_id"
   end
 
@@ -72,6 +74,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_30_064649) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email_address", null: false
+    t.string "name", null: false
     t.string "password_digest", null: false
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true

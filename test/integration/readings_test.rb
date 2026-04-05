@@ -10,14 +10,14 @@ class ReadingsTest < ActionDispatch::IntegrationTest
 
     get reading_path(reading)
 
-    assert_response :success
+    assert_response :ok
     assert_dom 'h2', reading.book.title
   end
 
   test 'new' do
     get new_reading_path(book_id: books(:alice2).id)
 
-    assert_response :success
+    assert_response :ok
     assert_dom 'input[type="submit"][value="追加する"]'
   end
 
