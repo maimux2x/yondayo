@@ -1,3 +1,11 @@
+<% content_for :head do %>
+  <meta property="og:url" content="<%= public_reading_url(@reading.share_token) %>">
+  <meta property="og:title" content="<%= @reading.user.name %>の読書記録">
+  <meta property="og:description" content="<%= @reading.book.title %> (<%= @reading.book.author %>)">
+  <meta property="og:image" content="<%= asset_url("logo.png") %>">
+  <meta property="og:site_name" content="よんだよ">
+<% end %>
+
 <div class="mb-3 d-flex align-items-center">
   <div class="me-3">
     <% if @reading.user.avatar.attached? %>
