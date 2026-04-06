@@ -1,8 +1,8 @@
 # Name of your application. Used to uniquely configure containers.
-service: bookshelf
+service: yondayo
 
 # Name of the container image (use your-user/app-name on external registries).
-image: maimu/bookshelf
+image: maimu/yondayo
 
 # Deploy to these servers.
 servers:
@@ -22,7 +22,7 @@ servers:
 #
 proxy:
   ssl: true
-  host: bookshelf.maimux2x.com
+  host: yondayo.maimux2x.com
 
   # job:
   #   hosts:
