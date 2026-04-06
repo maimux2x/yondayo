@@ -6,7 +6,6 @@ user = User.create!(
 book = Book.create!(
   title:                  'アジャイルサムライ――達人開発者への道',
   author:                 'Jonathan Rasmusson',
-  cover:                  '',
   google_books_volume_id: 'qqkQ-HhjZf0C'
 )
 

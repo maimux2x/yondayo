@@ -1,2 +1,0 @@
-alice1_cover_blob: <%= ActiveStorage::FixtureSet.blob filename: 'cover.png', service_name: 'test_fixtures' %>
-alice2_cover_blob: <%= ActiveStorage::FixtureSet.blob filename: 'cover.png', service_name: 'test_fixtures' %>

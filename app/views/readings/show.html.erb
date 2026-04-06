@@ -1,11 +1,6 @@
 <div class="card mb-3">
   <div class="card-body">
     <div class="d-flex align-items-center">
-      <% if @reading.book.cover.attached? %>
-        <div class="me-3">
-          <%= image_tag(@reading.book.cover, width: '120') %>
-        </div>
-      <% end %>
       <div class="flex-grow-1">
         <h2 class="card-title"><%= @reading.book.title %></h2>
         <p><%= @reading.book.author %></p>

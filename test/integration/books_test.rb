@@ -76,8 +76,7 @@ class BooksTest < ActionDispatch::IntegrationTest
     )
 
     stub_request(:get, 'http://example.com/foo').to_return(
-      headers: {'Content-Type' => 'image/png'},
-      body:    file_fixture('cover.png').read
+      headers: {'Content-Type' => 'image/png'}
     )
 
     assert_difference 'Book.count', 1 do
@@ -94,8 +93,6 @@ class BooksTest < ActionDispatch::IntegrationTest
 
     assert_equal 'New book',   book.title
     assert_equal 'New author', book.author
-
-    assert book.cover.attached?
   end
 
   test 'create (existing book, new reading)' do

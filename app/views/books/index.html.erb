@@ -10,11 +10,6 @@
       <div class="card mb-3">
         <div class="card-body">
           <div class="d-flex">
-            <% if cover_url = volume[:cover_url] %>
-              <div class="me-3">
-                <%= image_tag volume[:cover_url], width: 100 %>
-              </div>
-            <% end %>
             <div class="flex-grow-1">
               <h5 class="card-title">
                 <%= link_to volume[:title], books_path(volume_id: volume[:id]), data: { turbo_method: :post }, class: 'stretched-link text-decoration-none' %>
