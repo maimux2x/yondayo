@@ -20,22 +20,14 @@ class BooksTest < ActionDispatch::IntegrationTest
             id: 'volume1',
 
             volumeInfo: {
-              title: 'Title 1',
-
-              imageLinks: {
-                thumbnail: 'http://example.com/foo'
-              }
+              title: 'Title 1'
             }
           },
           {
             id: 'volume2',
 
             volumeInfo: {
-              title: 'Title 2',
-
-              imageLinks: {
-                thumbnail: 'http://example.com/bar'
-              }
+              title: 'Title 2'
             }
           }
         ]
@@ -66,17 +58,9 @@ class BooksTest < ActionDispatch::IntegrationTest
 
           authors: [
             'New author'
-          ],
-
-          imageLinks: {
-            large: 'http://example.com/foo'
-          }
+          ]
         }
       }
-    )
-
-    stub_request(:get, 'http://example.com/foo').to_return(
-      headers: {'Content-Type' => 'image/png'}
     )
 
     assert_difference 'Book.count', 1 do
@@ -111,17 +95,9 @@ class BooksTest < ActionDispatch::IntegrationTest
 
           authors: [
             book.author
-          ],
-
-          imageLinks: {
-            large: 'http://example.com/foo'
-          }
+          ]
         }
       }
-    )
-
-    stub_request(:get, 'http://example.com/foo').to_return(
-      headers: {'Content-Type' => 'image/png'}
     )
 
     assert_no_difference 'Book.count' do
@@ -152,17 +128,9 @@ class BooksTest < ActionDispatch::IntegrationTest
 
           authors: [
             'Updated author'
-          ],
-
-          imageLinks: {
-            large: 'http://example.com/foo'
-          }
+          ]
         }
       }
-    )
-
-    stub_request(:get, 'http://example.com/foo').to_return(
-      headers: {'Content-Type' => 'image/png'}
     )
 
     assert_no_difference 'Book.count' do

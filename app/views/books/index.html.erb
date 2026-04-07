@@ -9,26 +9,22 @@
     <% @volumes.each do |volume| %>
       <div class="card mb-3">
         <div class="card-body">
-          <div class="d-flex">
-            <div class="flex-grow-1">
-              <h5 class="card-title">
-                <%= link_to volume[:title], books_path(volume_id: volume[:id]), data: { turbo_method: :post }, class: 'stretched-link text-decoration-none' %>
-                <% if volume[:is_ebook] %>
-                  <small class="text-secondary">電子書籍</small>
-                <% end %>
-              </h5>
-              <dl class="mb-0">
-                <dt>著者</dt>
-                <dd><%= volume[:author] %></dd>
+          <h5 class="card-title">
+            <%= link_to volume[:title], books_path(volume_id: volume[:id]), data: { turbo_method: :post }, class: 'stretched-link text-decoration-none' %>
+            <% if volume[:is_ebook] %>
+              <small class="text-secondary">電子書籍</small>
+            <% end %>
+          </h5>
+          <dl class="mb-0">
+            <dt>著者</dt>
+            <dd><%= volume[:author] %></dd>
 
-                <dt>出版社</dt>
-                <dd><%= volume[:publisher] %></dd>
+            <dt>出版社</dt>
+            <dd><%= volume[:publisher] %></dd>
 
-                <dt>出版日</dt>
-                <dd><%= volume[:published_date] %></dd>
-              </dl>
-            </div>
-          </div>
+            <dt>出版日</dt>
+            <dd><%= volume[:published_date] %></dd>
+          </dl>
         </div>
       </div>
     <% end %>
