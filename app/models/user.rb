@@ -4,7 +4,6 @@ class User < ApplicationRecord
 
   has_one_attached :avatar do |attachable|
     attachable.variant :profile, resize_to_limit: [100, 100]
-    attachable.variant :icon,    resize_to_limit: [50, 50]
   end
 
   has_many :readings, dependent: :destroy
