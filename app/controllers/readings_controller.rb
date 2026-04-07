@@ -30,7 +30,7 @@ class ReadingsController < ApplicationController
   def destroy
     Current.user.readings.find(params[:id]).delete
 
-    redirect_to readings_path, status: :see_other, notice: '削除しました'
+    redirect_to root_path, status: :see_other, notice: '削除しました'
   end
 
   private

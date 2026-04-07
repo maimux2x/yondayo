@@ -1,20 +1,21 @@
+<% content_for :head do %>
+  <meta property="og:url" content="<%= public_reading_url(@reading.share_token) %>">
+  <meta property="og:title" content="<%= @reading.user.name %>の読書記録">
+  <meta property="og:description" content="<%= @reading.book.title %> (<%= @reading.book.author %>)">
+  <meta property="og:image" content="<%= asset_url("logo.png") %>">
+  <meta property="og:site_name" content="よんだよ">
+<% end %>
+
 <div class="mb-3 d-flex align-items-center">
-  <div class="me-3">
-    <% if @reading.user.avatar.attached? %>
-      <%= image_tag @reading.user.avatar.variant(:icon) %>
-    <% end %>
-  </div>
-  <h2 class="me-3"><%= @reading.user.name %>の読書記録</h2>
-  <time class="text-secondary" datetime="<%= @reading.created_at.to_date %>"><%= l(@reading.created_at) %></time>
+  <% if @reading.user.avatar.attached? %>
+    <%= image_tag @reading.user.avatar.variant(:profile), height: 50, class: "d-block me-3" %>
+  <% end %>
+  <h2><%= @reading.user.name %>の読書記録</h2>
 </div>
+<time class="text-secondary d-block mb-3" datetime="<%= @reading.created_at.to_date %>"><%= l(@reading.created_at) %></time>
 <div class="card mb-3">
   <div class="card-body">
     <div class="d-flex align-items-center">
-      <% if @reading.book.cover.attached? %>
-        <div class="me-3">
-          <%= image_tag(@reading.book.cover, width: '120') %>
-        </div>
-      <% end %>
       <div class="flex-grow-1">
         <h2 class="card-title"><%= @reading.book.title %></h2>
         <p><%= @reading.book.author %></p>

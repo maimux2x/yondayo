@@ -5,10 +5,3 @@
   <dt>著者</dt>
   <dd><%= book.author %></dd>
 </dl>
-
-<% if book.cover.attached? %>
-  <div class='mb-3'>
-    <%= image_tag(book.cover, width: 100) %>
-  </div>
-<% end %>
-
