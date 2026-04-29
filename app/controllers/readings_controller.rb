@@ -39,6 +39,7 @@ class ReadingsController < ApplicationController
     params.expect(reading: [
       :book_id,
       :status,
+      :memo,
       :comment
     ])
   end
