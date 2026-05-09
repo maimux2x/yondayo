@@ -4,10 +4,12 @@
   <%= f.text_field :name, label: '名前' %>
   <%= f.email_field :email_address, label: 'メールアドレス' %>
   <%= f.file_field :avatar, label: 'アイコン画像' %>
+
   <% if @profile.avatar.attached? %>
     <div class="mb-3">
-      <%= image_tag @profile.avatar.variant(:profile) %>
+      <%= image_tag @profile.avatar.variant(:profile), alt: "" %>
     </div>
   <% end %>
+
   <%= f.primary '更新' %>
 <% end %>
