@@ -1,18 +1,21 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <title><%= content_for(:title) || "よんだよ" %></title>
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="よんだよ">
     <meta name="mobile-web-app-capable" content="yes">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+    <%# = tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -26,10 +29,18 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <%= link_to root_path do %>
-          <%= image_tag "logo-header2.png", height: '40' %>
+          <%= image_tag "logo-header2.png", height: '40', alt: "よんだよ" %>
         <% end %>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -37,14 +48,20 @@
           <ul class="navbar-nav ms-auto">
             <% if authenticated? %>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button
+                  class="nav-link dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
                   <%= Current.user.name %>
-                </a>
+                </button>
 
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li>
                     <%= link_to "プロフィール編集", edit_profile_path, class: "dropdown-item" %>
                   </li>
+
                   <li>
                     <%= link_to "Logout", session_path, data: { turbo_method: :delete}, class: "dropdown-item" %>
                   </li>
@@ -58,11 +75,21 @@
 
     <div class="container py-3">
       <% if flash[:notice] %>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div
+          class="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
           <%= flash[:notice] %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
         </div>
       <% end %>
+
       <%= yield %>
     </div>
   </body>

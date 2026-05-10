@@ -1,4 +1,5 @@
 <h2 class="mb-3">本を検索</h2>
+
 <%= bootstrap_form_with url: books_path, method: :get, class: 'mb-3' do |f| %>
   <%= f.text_field :q, label: 'タイトル・著者・ISBN', value: params[:q] %>
   <%= f.primary '検索' %>
@@ -11,10 +12,12 @@
         <div class="card-body">
           <h5 class="card-title">
             <%= link_to volume[:title], books_path(volume_id: volume[:id]), data: { turbo_method: :post }, class: 'stretched-link text-decoration-none' %>
+
             <% if volume[:is_ebook] %>
               <small class="text-secondary">電子書籍</small>
             <% end %>
           </h5>
+
           <dl class="mb-0">
             <dt>著者</dt>
             <dd><%= volume[:author] %></dd>

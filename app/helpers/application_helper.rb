@@ -7,4 +7,8 @@ module ApplicationHelper
     when 'unread'      then 'secondary'
     end
   end
+
+  def status_badge_classes(status)
+    "badge text-bg-#{status_badge_class(status)}"
+  end
 end
