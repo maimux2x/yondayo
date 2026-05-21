@@ -11,7 +11,7 @@ gem 'dartsass-rails'
 gem 'enum_help'
 gem 'herb'
 gem 'httpx'
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 2.0'
 gem 'importmap-rails'
 gem 'jbuilder'
 gem 'kamal', require: false
