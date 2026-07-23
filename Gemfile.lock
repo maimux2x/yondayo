@@ -177,8 +177,8 @@ GEM
     herb (0.10.2-arm64-darwin)
     herb (0.10.2-x86_64-linux-gnu)
     herb (0.10.2-x86_64-linux-musl)
-    http-2 (1.2.0)
-    httpx (1.8.0)
+    http-2 (1.2.1)
+    httpx (1.8.1)
       http-2 (>= 1.2.0)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
@@ -579,8 +579,8 @@ CHECKSUMS
   herb (0.10.2-arm64-darwin) sha256=49c89173478c83e3de241fc7d2c52892d1b788fd26076ba25dd2399656d7f561
   herb (0.10.2-x86_64-linux-gnu) sha256=7042322268a83c62bed32a5be4b64e0f4716c88d45a6ac372e839d646711a863
   herb (0.10.2-x86_64-linux-musl) sha256=c91182c8b75431fe6a77c7a776f8be7db4b9a245ee95821f943e8d3725242664
-  http-2 (1.2.0) sha256=5bed923379ae67895d3bde440502219543da2885104b46ed7d604f5990efad1c
-  httpx (1.8.0) sha256=10b300875be99cbc3497397278cf99632262567886f3582ee25ce492bdadbe2a
+  http-2 (1.2.1) sha256=d290f3b7daa70b8be8cd2260306c01243c73ec4df9d598feadaf0ed26e00b9b7
+  httpx (1.8.1) sha256=8d9e003019b2c1a8f582daac9371ec9da96182c23064e211386eaad70b6e12e5
   i18n (1.15.2) sha256=00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5
   image_processing (2.0.2) sha256=d0cf990f862d64efb1a14916044bf4b5bb2bccc7e235022413cde46019799cfa
   importmap-rails (2.2.3) sha256=7101be2a4dc97cf1558fb8f573a718404c5f6bcfe94f304bf1f39e444feeb16a
