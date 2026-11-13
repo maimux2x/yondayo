@@ -179,14 +179,13 @@ GEM
       bigdecimal
       rake (~> 13.3)
     hashdiff (1.2.1)
-    herb (0.10.3)
-    herb (0.10.3-aarch64-linux-gnu)
-    herb (0.10.3-aarch64-linux-musl)
-    herb (0.10.3-arm-linux-gnu)
-    herb (0.10.3-arm-linux-musl)
-    herb (0.10.3-arm64-darwin)
-    herb (0.10.3-x86_64-linux-gnu)
-    herb (0.10.3-x86_64-linux-musl)
+    herb (0.11.2-aarch64-linux-gnu)
+    herb (0.11.2-aarch64-linux-musl)
+    herb (0.11.2-arm-linux-gnu)
+    herb (0.11.2-arm-linux-musl)
+    herb (0.11.2-arm64-darwin)
+    herb (0.11.2-x86_64-linux-gnu)
+    herb (0.11.2-x86_64-linux-musl)
     http-2 (1.2.3)
     httpx (1.8.4)
       http-2 (>= 1.2.0)
@@ -597,14 +596,13 @@ CHECKSUMS
   google-protobuf (4.34.1-x86_64-linux-gnu) sha256=87088c9fd8e47b5b40ca498fc1195add6149e941ff7e81c532a5b0b8876d4cc9
   google-protobuf (4.34.1-x86_64-linux-musl) sha256=8c0e91436fbe504ffc64f0bd621f2e69adbcce8ed2c58439d7a21117069cfdd7
   hashdiff (1.2.1) sha256=9c079dbc513dfc8833ab59c0c2d8f230fa28499cc5efb4b8dd276cf931457cd1
-  herb (0.10.3) sha256=da76e8bfbb302586ee51a4fb608624f48218fbfea198a9493540b42f7654024b
-  herb (0.10.3-aarch64-linux-gnu) sha256=1eaea87e6577557492a1b0ddaae989fba8a8ddd382e888ee5f939ce6ded06eb8
-  herb (0.10.3-aarch64-linux-musl) sha256=4ac7ccd194f8f284ffc7bf093676f5194cf0f44ea4a7d3888eac095e81c43e1f
-  herb (0.10.3-arm-linux-gnu) sha256=d5f007b665a705b5566f1068b54e1600d5ffe6cb0b7d274e27dd7ed5918ca54e
-  herb (0.10.3-arm-linux-musl) sha256=09a0979f64ee3aff0b25a345c2cecd15992a0532295fd00249d73f13a3e313b1
-  herb (0.10.3-arm64-darwin) sha256=1a5bef57d925d775496328e7a01a9c1260e1d83bed8038b60a4f8c81b12c15a3
-  herb (0.10.3-x86_64-linux-gnu) sha256=cbb49b66f2bdc92d17109d1ea9452e88ba6a8ae52e9ddd5279deff83dcc4c66d
-  herb (0.10.3-x86_64-linux-musl) sha256=c84482d6b57f13c2e1a0fa029649efb0e5fdc876a3fd564bae09cf42bd4d5ae1
+  herb (0.11.2-aarch64-linux-gnu) sha256=b8015cba548ff79f04c69dd9ccf92a8dc8900fca8a0fc23b000f92fdf7219842
+  herb (0.11.2-aarch64-linux-musl) sha256=0b41e988a6c81cb05cacfb3a5444d729fb1c41970bfe594fbdc91319376ce8cc
+  herb (0.11.2-arm-linux-gnu) sha256=f7f7d1ecf69670a39911b7d159705e55d2f0f9f3e935cf27f29a02e4723a6445
+  herb (0.11.2-arm-linux-musl) sha256=677d0e8676f96448c4e0a82da6e772c90f6de43e48ef13987f57518472d69568
+  herb (0.11.2-arm64-darwin) sha256=7a5e23818c3f784690384fc111eae50d6993723eb0c172a8a72d0be167281d78
+  herb (0.11.2-x86_64-linux-gnu) sha256=2627fe909e7e6b0548926573d87a2e12b6d65bc85964832d34abf5ba165bfc37
+  herb (0.11.2-x86_64-linux-musl) sha256=aa6e7aa38d44de757d3076e331234f55ed2f392c2bd0203a3aa4ceea0b6bdd3e
   http-2 (1.2.3) sha256=f4e3a7000e9a8ab97595f09eac44c6ec10a2aa438360758124df0ca5bcb280d4
   httpx (1.8.4) sha256=1782ecde81eb4e961ad8735ec74a6fec8e60efeaa4592c6b2f55d72e19aaeca8
   i18n (1.15.2) sha256=00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5
