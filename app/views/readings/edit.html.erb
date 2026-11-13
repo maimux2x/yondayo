@@ -1,7 +1,15 @@
-<h2 class="mb-3">読書記録を編集</h2>
-<%= render 'book', book: @reading.book %>
+<nav class="page-nav">
+  <%= link_to "← 戻る", reading_path(@reading), class: "page-nav-back" %>
+</nav>
+
+<h1 class="h4 mb-3">読書記録を編集</h1>
+
+<%= render "book", book: @reading.book %>
 
 <%= bootstrap_form_with model: @reading do |f| %>
-  <%= render 'form', f: %>
-  <%= f.primary '更新' %>
+  <%= render "form", f: %>
+
+  <div class="sticky-action">
+    <%= f.primary "更新", class: "btn btn-primary w-100" %>
+  </div>
 <% end %>

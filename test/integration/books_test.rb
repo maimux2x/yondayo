@@ -40,8 +40,8 @@ class BooksTest < ActionDispatch::IntegrationTest
 
     assert_response :success
 
-    assert_dom 'a', 'Title 1'
-    assert_dom 'a', 'Title 2'
+    assert_dom 'h2', 'Title 1'
+    assert_dom 'h2', 'Title 2'
   end
 
   test 'create (new book, new reading)' do

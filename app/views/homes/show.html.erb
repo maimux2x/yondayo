@@ -1,27 +1,54 @@
-<h2>読書記録</h2>
-
-<%= link_to '追加する', books_path, class: 'btn btn-outline-primary mb-3' %>
-
-<div class="row row-cols-2">
-  <% @readings.each do |reading| %>
-    <div class="col">
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">
-            <%= link_to reading.book.title, reading_path(reading), class: 'stretched-link text-decoration-none' %>
-          </h5>
-
-          <p class="text-body-secondary mb-2"><%= reading.book.author %></p>
-
-          <span class="<%= status_badge_classes(reading.status) %>">
-            <%= reading.status_i18n %>
-          </span>
-        </div>
-      </div>
-    </div>
-  <% end %>
+<div class="d-flex align-items-end justify-content-between mb-3">
+  <h1 class="h3 mb-0">読書記録</h1>
+  <span class="text-body-secondary small">全 <%= @pagy.count %> 冊</span>
 </div>
 
-<div class="d-flex justify-content-center">
-  <%== @pagy.series_nav(:bootstrap) if @pagy.last > 1 %>
+<div class="stat-grid mb-4">
+  <div class="stat-cell stat-cell--read">
+    <span class="stat-num"><%= @stats["read"].to_i %></span>
+    <span class="stat-label">読了</span>
+  </div>
+
+  <div class="stat-cell stat-cell--reading">
+    <span class="stat-num"><%= @stats["in_progress"].to_i %></span>
+    <span class="stat-label">読書中</span>
+  </div>
+
+  <div class="stat-cell stat-cell--unread">
+    <span class="stat-num"><%= @stats["unread"].to_i %></span>
+    <span class="stat-label">未読</span>
+  </div>
+</div>
+
+<% if @readings.any? %>
+  <div class="d-flex flex-column gap-3 mb-3">
+    <% @readings.each do |reading| %>
+      <div class="reading-card reading-card--<%= reading.status %> position-relative">
+        <div class="reading-title mb-1">
+          <%= link_to reading.book.title, reading_path(reading), class: "stretched-link text-decoration-none text-reset" %>
+        </div>
+
+        <div class="reading-author mb-2"><%= reading.book.author %></div>
+
+        <div class="d-flex align-items-center gap-2">
+          <%= status_tag reading %>
+          <%= finished_on_tag reading %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <%== @pagy.series_nav(:bootstrap) if @pagy.last > 1 %>
+  </div>
+<% else %>
+  <div class="empty-state">
+    <p class="mb-0">まだ読書記録がありません。<br>本を検索して、最初の1冊を記録しましょう。</p>
+  </div>
+<% end %>
+
+<div class="sticky-action">
+  <%= link_to books_path, class: "btn btn-primary w-100" do %>
+    <span aria-hidden="true">＋</span> 本を追加する
+  <% end %>
 </div>
