@@ -11,8 +11,17 @@ class Reading < ApplicationRecord
   }, validate: true
 
   before_create :generate_share_token
+  before_save   :sync_finished_on
 
   private
+
+  def sync_finished_on
+    if read?
+      self.finished_on ||= Date.current
+    else
+      self.finished_on = nil
+    end
+  end
 
   def generate_share_token
     self.share_token = SecureRandom.urlsafe_base64(16)

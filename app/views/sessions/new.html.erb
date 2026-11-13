@@ -1,10 +1,16 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+<div class="auth-brand">
+  <%= image_tag "logo/mark.svg", height: 36, alt: "" %>
+  <span class="app-wordmark">よんだよ</span>
+</div>
 
-<%= bootstrap_form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
-  <%= form.submit "Sign in" %>
-<% end %>
+<h1 class="visually-hidden">ログイン</h1>
 
-<br>
+<div class="card">
+  <div class="card-body p-4">
+    <%= bootstrap_form_with url: session_path do |f| %>
+      <%= f.email_field :email_address, label: "メールアドレス", required: true, autofocus: true, autocomplete: "username", value: params[:email_address] %>
+      <%= f.password_field :password, label: "パスワード", required: true, autocomplete: "current-password", maxlength: 72 %>
+      <%= f.primary "ログイン", class: "btn btn-primary w-100" %>
+    <% end %>
+  </div>
+</div>

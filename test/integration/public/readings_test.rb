@@ -5,6 +5,6 @@ class Public::ReadingsTest < ActionDispatch::IntegrationTest
     get public_reading_path(readings(:alice_alice1).share_token)
 
     assert_response :ok
-    assert_dom 'h2', 'Aliceの読書記録'
+    assert_dom '.public-user', 'Aliceの読書記録'
   end
 end

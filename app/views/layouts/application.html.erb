@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="ja">
   <head>
     <title><%= content_for(:title) || "よんだよ" %></title>
 
@@ -17,8 +16,11 @@
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%# = tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <%= preload_link_tag "ShipporiMinchoB1-SemiBold.woff2" %>
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -26,71 +28,58 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <%= link_to root_path do %>
-          <%= image_tag "logo-header2.png", height: '40', alt: "よんだよ" %>
-        <% end %>
+    <%# ログイン前の画面（ログイン・パスワード再設定・共有ページ）は各画面にロゴがあるためヘッダーを出さない %>
+    <% if authenticated? %>
+      <header class="app-header">
+        <div class="container app-container d-flex align-items-center justify-content-between py-2">
+          <%= link_to root_path, class: "d-flex align-items-center gap-2 text-decoration-none" do %>
+            <%= image_tag "logo/mark.svg", height: 23, alt: "" %>
+            <span class="app-wordmark">よんだよ</span>
+          <% end %>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+          <div class="dropdown">
+            <button
+              class="btn btn-link text-decoration-none p-0 d-flex align-items-center gap-2"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <%= avatar_tag Current.user, class_name: "app-avatar" %>
+              <span class="text-body-secondary small"><%= Current.user.name %></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <% if authenticated? %>
-              <li class="nav-item dropdown">
-                <button
-                  class="nav-link dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <%= Current.user.name %>
-                </button>
-
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <%= link_to "プロフィール編集", edit_profile_path, class: "dropdown-item" %>
-                  </li>
-
-                  <li>
-                    <%= link_to "Logout", session_path, data: { turbo_method: :delete}, class: "dropdown-item" %>
-                  </li>
-                </ul>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <%= link_to "プロフィール編集", edit_profile_path, class: "dropdown-item" %>
               </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </nav>
 
-    <div class="container py-3">
-      <% if flash[:notice] %>
+              <li>
+                <%= button_to "ログアウト", session_path, method: :delete, class: "dropdown-item" %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+    <% end %>
+
+    <main class="container app-container py-3">
+      <% flash.each do |type, message| %>
         <div
-          class="alert alert-success alert-dismissible fade show"
+          class="alert <%= type == "alert" ? "alert-danger" : "alert-success" %> alert-dismissible fade show"
           role="alert"
         >
-          <%= flash[:notice] %>
+          <%= message %>
 
           <button
             type="button"
             class="btn-close"
             data-bs-dismiss="alert"
-            aria-label="Close"
+            aria-label="閉じる"
           ></button>
         </div>
       <% end %>
 
       <%= yield %>
-    </div>
+    </main>
   </body>
 </html>

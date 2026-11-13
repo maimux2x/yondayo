@@ -1,9 +1,16 @@
-<h1>Update your password</h1>
+<div class="auth-brand">
+  <%= image_tag "logo/mark.svg", height: 36, alt: "" %>
+  <span class="app-wordmark">よんだよ</span>
+</div>
 
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<div class="card">
+  <div class="card-body p-4">
+    <h1 class="h5 mb-3">新しいパスワードを設定する</h1>
 
-<%= form_with url: password_path(params[:token]), method: :put do |form| %>
-  <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: "Enter new password", maxlength: 72 %><br>
-  <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Repeat new password", maxlength: 72 %><br>
-  <%= form.submit "Save" %>
-<% end %>
+    <%= bootstrap_form_with url: password_path(params[:token]), method: :put do |f| %>
+      <%= f.password_field :password, label: "新しいパスワード", required: true, autocomplete: "new-password", maxlength: 72 %>
+      <%= f.password_field :password_confirmation, label: "新しいパスワード（確認）", required: true, autocomplete: "new-password", maxlength: 72 %>
+      <%= f.primary "保存する", class: "btn btn-primary w-100" %>
+    <% end %>
+  </div>
+</div>

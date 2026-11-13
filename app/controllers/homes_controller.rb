@@ -1,7 +1,8 @@
 class HomesController < ApplicationController
   def show
-    readings = Current.user.readings.order(id: :desc)
+    readings = Current.user.readings
 
-    @pagy, @readings = pagy(readings)
+    @stats = readings.group(:status).count
+    @pagy, @readings = pagy(readings.includes(:book).order(id: :desc))
   end
 end

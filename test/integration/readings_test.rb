@@ -11,7 +11,7 @@ class ReadingsTest < ActionDispatch::IntegrationTest
     get reading_path(reading)
 
     assert_response :ok
-    assert_dom 'h2', reading.book.title
+    assert_dom 'h1', reading.book.title
   end
 
   test 'new' do
@@ -34,8 +34,8 @@ class ReadingsTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
 
-    assert_dom 'dd', '未読'
-    assert_dom 'dd', 'これから読む'
+    assert_dom '.status-tag', '未読'
+    assert_dom '.prose', 'これから読む'
   end
 
   test 'edit' do
@@ -57,8 +57,8 @@ class ReadingsTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
 
-    assert_dom 'dd', '読んでいる'
-    assert_dom 'dd', '読み始めた'
+    assert_dom '.status-tag', '読書中'
+    assert_dom '.prose', '読み始めた'
   end
 
   test 'destroy' do
