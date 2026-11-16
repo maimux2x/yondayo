@@ -61,6 +61,22 @@ class ReadingsTest < ActionDispatch::IntegrationTest
     assert_dom '.prose', '読み始めた'
   end
 
+  test 'update (read with finished_on)' do
+    patch reading_path(readings(:alice_alice1)), params: {
+      reading: {
+        status:      'read',
+        finished_on: '2026-10-01'
+      }
+    }
+
+    assert_response :see_other
+
+    follow_redirect!
+
+    assert_dom '.status-tag', '読了'
+    assert_dom 'time[datetime="2026-10-01"]', '2026年10月01日(木)に読了'
+  end
+
   test 'destroy' do
     delete reading_path(readings(:alice_alice1))
 
