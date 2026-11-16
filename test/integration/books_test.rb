@@ -40,8 +40,11 @@ class BooksTest < ActionDispatch::IntegrationTest
 
     assert_response :success
 
-    assert_dom 'a', 'Title 1'
-    assert_dom 'a', 'Title 2'
+    assert_dom 'h2', 'Title 1'
+    assert_dom 'h2', 'Title 2'
+
+    assert_dom 'a[href=?][data-turbo-method="post"]', books_path(volume_id: 'volume1'), 'この本を記録する →'
+    assert_dom 'a[href=?][data-turbo-method="post"]', books_path(volume_id: 'volume2'), 'この本を記録する →'
   end
 
   test 'create (new book, new reading)' do

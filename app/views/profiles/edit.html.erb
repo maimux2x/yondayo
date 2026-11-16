@@ -1,15 +1,17 @@
-<h2 class="mb-3">プロフィール編集</h2>
+<nav class="page-nav">
+  <%= link_to "← 読書記録", root_path, class: "page-nav-back" %>
+</nav>
+
+<h1 class="h4 mb-3">プロフィール編集</h1>
 
 <%= bootstrap_form_with model: @profile, url: profile_path do |f| %>
-  <%= f.text_field :name, label: '名前' %>
-  <%= f.email_field :email_address, label: 'メールアドレス' %>
-  <%= f.file_field :avatar, label: 'アイコン画像' %>
+  <%= f.text_field :name, label: "名前" %>
+  <%= f.email_field :email_address, label: "メールアドレス" %>
 
-  <% if @profile.avatar.attached? %>
-    <div class="mb-3">
-      <%= image_tag @profile.avatar.variant(:profile), alt: "" %>
-    </div>
-  <% end %>
+  <div class="d-flex align-items-center gap-3 mb-3">
+    <%= avatar_tag @profile, class_name: "app-avatar app-avatar--lg flex-shrink-0" %>
+    <%= f.file_field :avatar, label: "アイコン画像", wrapper: {class: "flex-grow-1 mb-0"} %>
+  </div>
 
-  <%= f.primary '更新' %>
+  <%= f.primary "更新", class: "btn btn-primary w-100" %>
 <% end %>

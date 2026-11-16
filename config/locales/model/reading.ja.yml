@@ -3,6 +3,5 @@ ja:
     reading:
       status:
         unread: 未読
-        in_progress: 読んでいる
-        read: 読み終わった
-
+        in_progress: 読書中
+        read: 読了

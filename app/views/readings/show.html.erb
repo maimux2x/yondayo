@@ -1,84 +1,97 @@
-<div class="card mb-3">
-  <div class="card-body">
-    <h2 class="card-title"><%= @reading.book.title %></h2>
-    <p><%= @reading.book.author %></p>
+<nav class="page-nav">
+  <%= link_to "← 読書記録", root_path, class: "page-nav-back" %>
+  <%= link_to "編集", edit_reading_path(@reading), class: "fw-medium" %>
+</nav>
 
-    <hr>
+<h1 class="h2 mb-2"><%= @reading.book.title %></h1>
+<p class="text-body-secondary mb-2"><%= @reading.book.author %></p>
 
-    <dl class="mb-0">
-      <dt>進捗</dt>
-
-      <dd><%= @reading.status_i18n %></dd>
-
-      <dt>読書メモ</dt>
-
-      <dd style="white-space: pre-wrap"><%= @reading.memo %></dd>
-
-      <dt>感想</dt>
-
-      <dd style="white-space: pre-wrap"><%= @reading.comment %></dd>
-    </dl>
-  </div>
+<div class="d-flex align-items-center gap-2 mb-4">
+  <%= status_tag @reading %>
+  <%= finished_on_tag @reading, suffix: "に読了" %>
 </div>
 
-<div class="d-flex">
-  <%= link_to '編集', edit_reading_path(@reading), class: 'btn btn-outline-primary me-3' %>
+<hr class="my-4">
 
-  <button
-    type="button"
-    class="btn btn-outline-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#URLShareModal"
-  >
-    共有する
-  </button>
+<% if @reading.memo.present? %>
+  <section class="mb-4">
+    <h2 class="field-label fw-normal mb-2">読書メモ</h2>
+    <div class="prose"><%= @reading.memo %></div>
+  </section>
+<% end %>
 
-  <div
-    class="modal fage"
-    id="URLShareModal"
-    tabindex="-1"
-    aria-labelledby="URLShareModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="mocal-title fs-5" id="URLShareModalLabel">読書記録を共有する</h1>
+<% if @reading.comment.present? %>
+  <section class="mb-4">
+    <h2 class="field-label fw-normal mb-2">感想</h2>
+    <div class="prose"><%= @reading.comment %></div>
+  </section>
+<% end %>
+
+<% if @reading.memo.blank? && @reading.comment.blank? %>
+  <p class="text-body-secondary small mb-4">読書メモと感想はまだありません。</p>
+<% end %>
+
+<hr class="my-4">
+
+<button
+  type="button"
+  class="btn btn-outline-primary w-100 mb-3"
+  data-bs-toggle="modal"
+  data-bs-target="#URLShareModal"
+>
+  共有する
+</button>
+
+<div class="text-center">
+  <%= button_to "この記録を削除する", reading_path(@reading), method: :delete,
+        class: "btn btn-link text-danger small text-decoration-none",
+        data: {turbo_confirm: "削除しますか？"} %>
+</div>
+
+<div
+  class="modal fade"
+  id="URLShareModal"
+  tabindex="-1"
+  aria-labelledby="URLShareModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-6 mb-0" id="URLShareModalLabel">読書記録を共有する</h2>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="閉じる"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="small text-body-secondary">共有ページには、名前・アイコンと、本のタイトル・著者・進捗・感想が表示されます。読書メモは共有されません。</p>
+
+        <div class="input-group" data-controller="clipboard">
+          <input
+            type="text"
+            class="form-control"
+            data-clipboard-target="source"
+            value="<%= public_reading_url(@reading.share_token) %>"
+            aria-label="共有URL"
+            autocomplete="off"
+            readonly
+          >
 
           <button
+            class="btn btn-outline-secondary"
             type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-
-        <div class="modal-body">
-          <div class="input-group" data-controller="clipboard">
-            <input
-              type="text"
-              class="form-control"
-              data-clipboard-target="source"
-              value="<%= public_reading_url(@reading.share_token) %>"
-              autocomplete="off"
-              readonly
-            >
-
-            <button
-              class="btn btn-outline-secondary"
-              type="button"
-              data-action="clipboard#copy"
-              data-clipboard-target="button"
-            >
-              コピー
-            </button>
-          </div>
+            data-action="clipboard#copy"
+            data-clipboard-target="button"
+          >
+            コピー
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<hr>
-
-<%= button_to '削除', reading_path(@reading), method: :delete, class: 'btn btn-danger', data: {turbo_confirm: '削除しますか？'} %>

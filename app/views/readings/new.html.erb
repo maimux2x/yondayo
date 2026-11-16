@@ -1,8 +1,16 @@
-<h2 class="mb-3">読書記録を追加</h2>
-<%= render 'book', book: @reading.book %>
+<nav class="page-nav">
+  <%= link_to "← 本を検索", books_path, class: "page-nav-back" %>
+</nav>
+
+<h1 class="h4 mb-3">読書記録を追加</h1>
+
+<%= render "book", book: @reading.book %>
 
 <%= bootstrap_form_with model: @reading do |f| %>
-  <%= render 'form', f: %>
+  <%= render "form", f: %>
   <%= f.hidden_field :book_id %>
-  <%= f.primary '追加する' %>
+
+  <div class="sticky-action">
+    <%= f.primary "追加する", class: "btn btn-primary w-100" %>
+  </div>
 <% end %>

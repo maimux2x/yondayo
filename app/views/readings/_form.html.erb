@@ -1,3 +1,21 @@
-<%= f.collection_radio_buttons :status, Reading.statuses_i18n, :first, :last, label: '進捗' %>
-<%= f.text_area :memo, label: '読書メモ', style: "field-sizing: content" %>
-<%= f.text_area :comment, label: '感想', style: "field-sizing: content" %>
+<%# f: bootstrap_form のフォームビルダー %>
+
+<div data-controller="finished-on">
+  <fieldset class="mb-3">
+    <legend class="field-label mb-2">進捗</legend>
+
+    <div class="status-segments">
+      <% Reading.statuses_i18n.each do |status, label| %>
+        <%= f.radio_button_without_bootstrap :status, status, data: {action: "finished-on#toggle"} %>
+        <%= f.label :status, label, value: status %>
+      <% end %>
+    </div>
+  </fieldset>
+
+  <%= tag.div hidden: !f.object.read?, data: {finished_on_target: "field"} do %>
+    <%= f.date_field :finished_on, label: "読了日", data: {finished_on_target: "input"} %>
+  <% end %>
+</div>
+
+<%= f.text_area :memo, label: "読書メモ", class: "autogrow" %>
+<%= f.text_area :comment, label: "感想", class: "autogrow", placeholder: "読み終えて感じたことを書く" %>

@@ -15,39 +15,40 @@
   <meta property="og:site_name" content="よんだよ">
 <% end %>
 
-<div class="mb-3 d-flex align-items-center">
-  <% if @reading.user.avatar.attached? %>
-    <%= image_tag @reading.user.avatar.variant(:profile), height: 50, class: "d-block me-3", alt: @reading.user.name %>
-  <% end %>
+<div class="public-header rounded-3 mb-4">
+  <div class="d-flex align-items-center gap-2 mb-3">
+    <%= image_tag "logo/mark.svg", height: 20, alt: "", class: "public-mark" %>
+    <span class="public-brand">よんだよ</span>
+  </div>
 
-  <h2><%= @reading.user.name %>の読書記録</h2>
-</div>
+  <div class="d-flex align-items-center gap-3">
+    <%= avatar_tag @reading.user, class_name: "public-avatar" %>
 
-<time
-  class="text-secondary d-block mb-3"
-  datetime="<%= @reading.created_at.to_date %>"
->
-  <%= l(@reading.created_at) %>
-</time>
+    <div>
+      <div class="public-user"><%= @reading.user.name %>の読書記録</div>
 
-<div class="card mb-3">
-  <div class="card-body">
-    <div class="d-flex align-items-center">
-      <div class="flex-grow-1">
-        <h2 class="card-title"><%= @reading.book.title %></h2>
-        <p><%= @reading.book.author %></p>
-
-        <hr>
-
-        <dl class="mb-0">
-          <dt>進捗</dt>
-          <dd><%= @reading.status_i18n %></dd>
-
-          <dt>感想</dt>
-
-          <dd style="white-space: pre-wrap"><%= @reading.comment %></dd>
-        </dl>
-      </div>
+      <time class="public-date" datetime="<%= @reading.created_at.to_date.iso8601 %>">
+        <%= l @reading.created_at.to_date, format: :long %>
+      </time>
     </div>
   </div>
 </div>
+
+<h1 class="h3 mb-2"><%= @reading.book.title %></h1>
+<p class="text-body-secondary mb-2"><%= @reading.book.author %></p>
+
+<%= status_tag @reading %>
+
+<hr class="my-4">
+
+<% if @reading.comment.present? %>
+  <section class="mb-4">
+    <h2 class="field-label fw-normal mb-2">感想</h2>
+    <div class="prose"><%= @reading.comment %></div>
+  </section>
+<% end %>
+
+<footer class="d-flex align-items-center justify-content-between border-top pt-3">
+  <span class="text-body-secondary small">読書の記録をつけるサービス</span>
+  <%= link_to "よんだよ →", root_path, class: "text-decoration-none" %>
+</footer>
