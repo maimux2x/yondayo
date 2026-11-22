@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   resources :books,    only: %i[index create]
 
   namespace :public do
-    resources :readings, only: %i[show], param: :share_token
+    resources :readings, only: %i[show], param: :share_token do
+      resource :ogp_image, only: %i[show]
+    end
   end
 
   get 'up' => 'rails/health#show', as: :rails_health_check
