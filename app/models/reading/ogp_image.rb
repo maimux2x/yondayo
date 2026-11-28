@@ -7,7 +7,7 @@ class Reading::OgpImage
   WIDTH  = 1200
   HEIGHT = 630
 
-  ASSETS_DIR = Rails.root.join('vendor/ogp')
+  ASSETS_DIR = Rails.root.join('lib/ogp')
   MARK       = ASSETS_DIR.join('mark.png').to_s
   MINCHO     = {file: ASSETS_DIR.join('fonts/ShipporiMinchoB1-SemiBold.ttf').to_s, name: 'Shippori Mincho B1 SemiBold'}.freeze
   GOTHIC     = {file: ASSETS_DIR.join('fonts/ZenKakuGothicNew-Regular.ttf').to_s,  name: 'Zen Kaku Gothic New'}.freeze
