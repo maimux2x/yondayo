@@ -268,6 +268,7 @@ body {
 .sticky-action {
   position: sticky;
   bottom: 0;
+  z-index: $zindex-sticky; // カード全体を覆う stretched-link（z-index: 1）より手前に置き、押せるようにする
   padding: .875rem 0 1.125rem;
   background: linear-gradient(to top, $paper 60%, rgba($paper, 0));
 
